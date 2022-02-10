@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les administrateurs{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mb-5 mt-2">Détails des administrateurs</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Identifiant</th>
+                    <td>{{ administrator.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ administrator.lastName }}</td>
+                </tr>
+                <tr>
+                    <th>Prénom</th>
+                    <td>{{ administrator.firstName }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ administrator.email }}</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td>{{ administrator.password }}</td>
+                </tr>
+                <tr>
+                    <th>Date de création</th>
+                    <td>{{ administrator.dateOfCreation ? administrator.dateOfCreation|date('d-M-Y') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ms-5">
+        <a href="{{ path('administrator_index') }}">Retour à la liste</a>
+
+        <a href="{{ path('administrator_edit', {'id': administrator.id}) }}">edit</a>
+
+        {{ include('administrator/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

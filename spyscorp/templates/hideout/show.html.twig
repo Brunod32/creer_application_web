@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planque{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mb-5 mt-2">Détails des Planques</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ hideout.id }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ hideout.code }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ hideout.address }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ hideout.country }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ hideout.type }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ms-5">
+        <a href="{{ path('hideout_index') }}">Retour à la liste</a>
+
+        <a href="{{ path('hideout_edit', {'id': hideout.id}) }}">Modifier</a>
+
+        {{ include('hideout/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}

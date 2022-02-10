@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un administrateur{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mt-2">Modifier un administrateur</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        {{ include('administrator/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('administrator_index') }}" role="button" class="btn btn-success mt-2">Retour à la liste</a>
+
+        {{ include('administrator/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une spécialité{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mt-2">Modifier une spécialité</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        {{ include('speciality/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('speciality_index') }}">Retour à la liste</a>
+
+        {{ include('speciality/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

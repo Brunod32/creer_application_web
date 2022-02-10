@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administrateurs{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mb-5 mt-2">Liste des administrateurs</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Mot de passe</th>
+                <th>Date de création</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for administrator in administrators %}
+                <tr>
+                    <td>{{ administrator.id }}</td>
+                    <td>{{ administrator.lastName }}</td>
+                    <td>{{ administrator.firstName }}</td>
+                    <td>{{ administrator.email }}</td>
+                    <td>{{ administrator.password }}</td>
+                    <td>{{ administrator.dateOfCreation ? administrator.dateOfCreation|date('d-m-Y') : '' }}</td>
+                    <td>
+                        <a href="{{ path('administrator_show', {'id': administrator.id}) }}">show</a>
+                        <a href="{{ path('administrator_edit', {'id': administrator.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun administrateur enregistrés</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <a href="{{ path('administrator_new') }}" role="button" class="btn btn-primary m-5">Créer un nouvel administrateur</a>
+{% endblock %}

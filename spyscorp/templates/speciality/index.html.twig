@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des spécialités{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mb-5 mt-2">Liste des spécialités</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for speciality in specialities %}
+                <tr>
+                    <td>{{ speciality.id }}</td>
+                    <td>{{ speciality.name }}</td>
+                    <td>
+                        <a href="{{ path('speciality_show', {'id': speciality.id}) }}">Détails</a>
+                        <a href="{{ path('speciality_edit', {'id': speciality.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune spécialité enregistrées</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <a href="{{ path('speciality_new') }}" role="button" class="btn btn-primary m-5">Créer une spécialité</a>
+{% endblock %}

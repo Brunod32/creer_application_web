@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une mission{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mt-2">Modifier une mission</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        {{ include('mission/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('mission_index') }}">Retour à la liste</a>
+
+        {{ include('mission/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

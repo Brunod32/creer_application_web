@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des planques{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mb-5 mt-2">Liste des planques</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Code</th>
+                <th>Adresse</th>
+                <th>Pays</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for hideout in hideouts %}
+                <tr>
+                    <td>{{ hideout.id }}</td>
+                    <td>{{ hideout.code }}</td>
+                    <td>{{ hideout.address }}</td>
+                    <td>{{ hideout.country }}</td>
+                    <td>{{ hideout.type }}</td>
+                    <td>
+                        <a href="{{ path('hideout_show', {'id': hideout.id}) }}">Détails</a>
+                        <a href="{{ path('hideout_edit', {'id': hideout.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucune planque enregistrées</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <a href="{{ path('hideout_new') }}" role="button" class="btn btn-primary m-5">Créer une nouvel planque</a>
+{% endblock %}

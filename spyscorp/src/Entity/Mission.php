@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\MissionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity(repositoryClass: MissionRepository::class)]
 class Mission
@@ -36,6 +39,34 @@ class Mission
 
     #[ORM\Column(type: 'date')]
     private \DateTime $dateEnd;
+
+    #[ORM\ManyToMany(targetEntity: Agent::class, inversedBy: 'missions')]
+    private ArrayCollection $agent;
+
+    #[ORM\OneToMany(mappedBy: 'mission', targetEntity: Contact::class)]
+    private ArrayCollection $contact;
+
+    #[ORM\OneToMany(mappedBy: 'mission', targetEntity: Target::class, orphanRemoval: true)]
+    private ArrayCollection $target;
+
+    #[ORM\OneToMany(mappedBy: 'mission', targetEntity: Hideout::class)]
+    private ArrayCollection $hideout;
+
+    #[ORM\ManyToOne(targetEntity: Speciality::class, inversedBy: 'missions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Speciality $speciality;
+
+    #[ORM\ManyToOne(targetEntity: Administrator::class, inversedBy: 'missions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Administrator $administrator;
+
+    #[Pure] public function __construct()
+    {
+        $this->agent = new ArrayCollection();
+        $this->contact = new ArrayCollection();
+        $this->target = new ArrayCollection();
+        $this->hideout = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -134,6 +165,144 @@ class Mission
     public function setDateEnd(\DateTimeInterface $dateEnd): self
     {
         $this->dateEnd = $dateEnd;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Agent[]
+     */
+    public function getAgent(): Collection|array
+    {
+        return $this->agent;
+    }
+
+    public function addAgent(Agent $agent): self
+    {
+        if (!$this->agent->contains($agent)) {
+            $this->agent[] = $agent;
+        }
+
+        return $this;
+    }
+
+    public function removeAgent(Agent $agent): self
+    {
+        $this->agent->removeElement($agent);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contact[]
+     */
+    public function getContact(): array|Collection
+    {
+        return $this->contact;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contact->contains($contact)) {
+            $this->contact[] = $contact;
+            $contact->setMission($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contact->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getMission() === $this) {
+                $contact->setMission(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Target[]
+     */
+    public function getTarget(): array|Collection
+    {
+        return $this->target;
+    }
+
+    public function addTarget(Target $target): self
+    {
+        if (!$this->target->contains($target)) {
+            $this->target[] = $target;
+            $target->setMission($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTarget(Target $target): self
+    {
+        if ($this->target->removeElement($target)) {
+            // set the owning side to null (unless already changed)
+            if ($target->getMission() === $this) {
+                $target->setMission(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hideout[]
+     */
+    public function getHideout(): Collection|array
+    {
+        return $this->hideout;
+    }
+
+    public function addHideout(Hideout $hideout): self
+    {
+        if (!$this->hideout->contains($hideout)) {
+            $this->hideout[] = $hideout;
+            $hideout->setMission($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHideout(Hideout $hideout): self
+    {
+        if ($this->hideout->removeElement($hideout)) {
+            // set the owning side to null (unless already changed)
+            if ($hideout->getMission() === $this) {
+                $hideout->setMission(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSpeciality(): ?Speciality
+    {
+        return $this->speciality;
+    }
+
+    public function setSpeciality(?Speciality $speciality): self
+    {
+        $this->speciality = $speciality;
+
+        return $this;
+    }
+
+    public function getAdministrator(): ?Administrator
+    {
+        return $this->administrator;
+    }
+
+    public function setAdministrator(?Administrator $administrator): self
+    {
+        $this->administrator = $administrator;
 
         return $this;
     }

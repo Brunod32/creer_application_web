@@ -28,6 +28,10 @@ class Target
     #[ORM\Column(type: 'string', length: 30)]
     private string $nationality;
 
+    #[ORM\ManyToOne(targetEntity: Mission::class, inversedBy: 'target')]
+    #[ORM\JoinColumn(nullable: false)]
+    private Mission $mission;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +93,18 @@ class Target
     public function setNationality(string $nationality): self
     {
         $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    public function getMission(): ?Mission
+    {
+        return $this->mission;
+    }
+
+    public function setMission(?Mission $mission): self
+    {
+        $this->mission = $mission;
 
         return $this;
     }

@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\AgentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity(repositoryClass: AgentRepository::class)]
 class Agent
@@ -27,6 +30,18 @@ class Agent
 
     #[ORM\Column(type: 'string', length: 30)]
     private string $nationality;
+
+    #[ORM\ManyToMany(targetEntity: Speciality::class, inversedBy: 'agents')]
+    private ArrayCollection $speciality;
+
+    #[ORM\ManyToMany(targetEntity: Mission::class, mappedBy: 'agent')]
+    private ArrayCollection $missions;
+
+    #[Pure] public function __construct()
+    {
+        $this->speciality = new ArrayCollection();
+        $this->missions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +104,57 @@ class Agent
     public function setNationality(string $nationality): self
     {
         $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Speciality[]
+     */
+    public function getSpeciality(): Collection|array
+    {
+        return $this->speciality;
+    }
+
+    public function addSpeciality(Speciality $speciality): self
+    {
+        if (!$this->speciality->contains($speciality)) {
+            $this->speciality[] = $speciality;
+        }
+
+        return $this;
+    }
+
+    public function removeSpeciality(Speciality $speciality): self
+    {
+        $this->speciality->removeElement($speciality);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Mission[]
+     */
+    public function getMissions(): Collection|array
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Mission $mission): self
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions[] = $mission;
+            $mission->addAgent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Mission $mission): self
+    {
+        if ($this->missions->removeElement($mission)) {
+            $mission->removeAgent($this);
+        }
 
         return $this;
     }

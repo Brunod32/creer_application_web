@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des missions{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mb-5 mt-2">Liste des missions</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Code</th>
+                <th>Pays</th>
+                <th>Type</th>
+                <th>Statut</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for mission in missions %}
+                <tr>
+                    <td>{{ mission.id }}</td>
+                    <td>{{ mission.title }}</td>
+                    <td>{{ mission.description }}</td>
+                    <td>{{ mission.code }}</td>
+                    <td>{{ mission.country }}</td>
+                    <td>{{ mission.type }}</td>
+                    <td>{{ mission.status }}</td>
+                    <td>{{ mission.dateStart ? mission.dateStart|date('Y-m-d') : '' }}</td>
+                    <td>{{ mission.dateEnd ? mission.dateEnd|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <a href="{{ path('mission_show', {'id': mission.id}) }}">Détails</a>
+                        <a href="{{ path('mission_edit', {'id': mission.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">Aucune mission enregistrées</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <a href="{{ path('mission_new') }}" role="button" class="btn btn-primary m-5">Créer uns nouvelle mission</a>
+{% endblock %}

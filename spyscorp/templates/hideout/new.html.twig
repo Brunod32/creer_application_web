@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle planque{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center mb-5 mt-2">Créer une nouvelle planque</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-5">
+        {{ include('hideout/_form.html.twig') }}
+
+        <a href="{{ path('hideout_index') }}" role="button" class="btn btn-success mt-2">Retour à la liste</a>
+    </div>
+
+{% endblock %}

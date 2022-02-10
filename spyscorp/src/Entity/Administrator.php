@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\AdministratorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity(repositoryClass: AdministratorRepository::class)]
 class Administrator
@@ -27,6 +30,14 @@ class Administrator
 
     #[ORM\Column(type: 'date')]
     private string $dateOfCreation;
+
+    #[ORM\OneToMany(mappedBy: 'administrator', targetEntity: Mission::class)]
+    private ArrayCollection $missions;
+
+    #[Pure] public function __construct()
+    {
+        $this->missions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +100,36 @@ class Administrator
     public function setDateOfCreation(\DateTimeInterface $dateOfCreation): self
     {
         $this->dateOfCreation = $dateOfCreation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Mission[]
+     */
+    public function getMissions(): Collection|array
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Mission $mission): self
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions[] = $mission;
+            $mission->setAdministrator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Mission $mission): self
+    {
+        if ($this->missions->removeElement($mission)) {
+            // set the owning side to null (unless already changed)
+            if ($mission->getAdministrator() === $this) {
+                $mission->setAdministrator(null);
+            }
+        }
 
         return $this;
     }
