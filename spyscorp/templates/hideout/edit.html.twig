@@ -12,11 +12,12 @@
         </div>
     </div>
 
-    <div class="m-5">
-        {{ include('hideout/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="ms-5">
+        {{ include('hideout/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-        <a href="{{ path('hideout_index') }}">Retour à la liste</a>
+        <a href="{{ path('hideout_index') }}" class="btn btn-success mt-2">Retour à la liste</a>
 
         {{ include('hideout/_delete_form.html.twig') }}
     </div>
+    {{ include('_footer.html.twig') }}
 {% endblock %}

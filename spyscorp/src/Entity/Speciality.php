@@ -20,10 +20,10 @@ class Speciality
     private string $name;
 
     #[ORM\ManyToMany(targetEntity: Agent::class, mappedBy: 'speciality')]
-    private ArrayCollection $agents;
+    private $agents;
 
     #[ORM\OneToMany(mappedBy: 'speciality', targetEntity: Mission::class)]
-    private ArrayCollection $missions;
+    private $missions;
 
     #[Pure] public function __construct()
     {
@@ -103,5 +103,11 @@ class Speciality
         }
 
         return $this;
+    }
+
+    // Add this function to string the speciality name in the agent and mission form
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

@@ -31,7 +31,7 @@
                     <td>{{ target.id }}</td>
                     <td>{{ target.lastName }}</td>
                     <td>{{ target.firstName }}</td>
-                    <td>{{ target.dateOfBirth ? target.dateOfBirth|date('Y-m-d') : '' }}</td>
+                    <td>{{ target.dateOfBirth ? target.dateOfBirth|date('d-m-Y') : '' }}</td>
                     <td>{{ target.code }}</td>
                     <td>{{ target.nationality }}</td>
                     <td>
@@ -47,7 +47,8 @@
             </tbody>
         </table>
     </div>
-
-
-    <a href="{{ path('target_new') }}" role="button" class="btn btn-primary m-5">Créer une cible</a>
+    <div class="m-5">
+        <a href="{{ path('target_new') }}" role="button" class="btn btn-primary m-5">Créer une cible</a>
+    </div>
+    {{ include('_footer.html.twig') }}
 {% endblock %}

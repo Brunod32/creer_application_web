@@ -38,8 +38,8 @@
                     <td>{{ mission.country }}</td>
                     <td>{{ mission.type }}</td>
                     <td>{{ mission.status }}</td>
-                    <td>{{ mission.dateStart ? mission.dateStart|date('Y-m-d') : '' }}</td>
-                    <td>{{ mission.dateEnd ? mission.dateEnd|date('Y-m-d') : '' }}</td>
+                    <td>{{ mission.dateStart ? mission.dateStart|date('d-m-Y') : '' }}</td>
+                    <td>{{ mission.dateEnd ? mission.dateEnd|date('d-m-Y') : '' }}</td>
                     <td>
                         <a href="{{ path('mission_show', {'id': mission.id}) }}">Détails</a>
                         <a href="{{ path('mission_edit', {'id': mission.id}) }}">Modifier</a>
@@ -53,7 +53,9 @@
             </tbody>
         </table>
     </div>
+    <div class="ms-5">
+        <a href="{{ path('mission_new') }}" role="button" class="btn btn-primary m-5">Créer une nouvelle mission</a>
+    </div>
 
-
-    <a href="{{ path('mission_new') }}" role="button" class="btn btn-primary m-5">Créer uns nouvelle mission</a>
+    {{ include('_footer.html.twig') }}
 {% endblock %}

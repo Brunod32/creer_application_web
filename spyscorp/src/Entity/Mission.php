@@ -41,16 +41,16 @@ class Mission
     private \DateTime $dateEnd;
 
     #[ORM\ManyToMany(targetEntity: Agent::class, inversedBy: 'missions')]
-    private ArrayCollection $agent;
+    private $agent;
 
     #[ORM\OneToMany(mappedBy: 'mission', targetEntity: Contact::class)]
-    private ArrayCollection $contact;
+    private $contact;
 
     #[ORM\OneToMany(mappedBy: 'mission', targetEntity: Target::class, orphanRemoval: true)]
-    private ArrayCollection $target;
+    private $target;
 
     #[ORM\OneToMany(mappedBy: 'mission', targetEntity: Hideout::class)]
-    private ArrayCollection $hideout;
+    private $hideout;
 
     #[ORM\ManyToOne(targetEntity: Speciality::class, inversedBy: 'missions')]
     #[ORM\JoinColumn(nullable: false)]
@@ -305,5 +305,11 @@ class Mission
         $this->administrator = $administrator;
 
         return $this;
+    }
+
+    // Add this function to string the mission name in the agent form
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }

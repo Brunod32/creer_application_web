@@ -32,10 +32,10 @@ class Agent
     private string $nationality;
 
     #[ORM\ManyToMany(targetEntity: Speciality::class, inversedBy: 'agents')]
-    private ArrayCollection $speciality;
+    private $speciality;
 
     #[ORM\ManyToMany(targetEntity: Mission::class, mappedBy: 'agent')]
-    private ArrayCollection $missions;
+    private $missions;
 
     #[Pure] public function __construct()
     {
@@ -157,5 +157,11 @@ class Agent
         }
 
         return $this;
+    }
+
+    // Add this function to string the agent name in the mission form
+    public function __toString(): string
+    {
+        return $this->firstName . ' ' .$this->lastName;
     }
 }

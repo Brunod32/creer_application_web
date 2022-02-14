@@ -13,10 +13,11 @@
     </div>
 
     <div class="m-5">
-        {{ include('mission/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('mission/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-        <a href="{{ path('mission_index') }}">Retour à la liste</a>
+        <a href="{{ path('mission_index') }}" class="btn btn-success mt-2">Retour à la liste</a>
 
         {{ include('mission/_delete_form.html.twig') }}
     </div>
+    {{ include('_footer.html.twig') }}
 {% endblock %}

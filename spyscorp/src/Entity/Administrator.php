@@ -29,10 +29,10 @@ class Administrator
     private string $password;
 
     #[ORM\Column(type: 'date')]
-    private string $dateOfCreation;
+    private \DateTime $dateOfCreation;
 
     #[ORM\OneToMany(mappedBy: 'administrator', targetEntity: Mission::class)]
-    private ArrayCollection $missions;
+    private $missions;
 
     #[Pure] public function __construct()
     {
@@ -132,5 +132,11 @@ class Administrator
         }
 
         return $this;
+    }
+
+    // Add this function to string the administrator name in the mission form
+    public function __toString(): string
+    {
+        return $this->firstName . ' ' . $this->lastName;
     }
 }
