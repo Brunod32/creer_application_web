@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Administrator;
 use App\Entity\Agent;
 use App\Entity\Mission;
 use App\Entity\Speciality;
@@ -71,13 +70,6 @@ class MissionType extends AbstractType
             ->add('speciality', EntityType::class, [
                 'choice_label' => 'name',
                 'class' => Speciality::class,
-                'multiple' => true,
-                'expanded' => true,
-            ])
-            ->add('administrator', EntityType::class, [
-                'choice_label' => 'lastname',
-                'class' => Administrator::class,
-                'multiple' => true,
                 'expanded' => true,
             ])
         ;
@@ -89,4 +81,5 @@ class MissionType extends AbstractType
             'data_class' => Mission::class,
         ]);
     }
+
 }

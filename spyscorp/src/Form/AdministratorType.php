@@ -23,6 +23,7 @@ class AdministratorType extends AbstractType
             ->add('dateOfCreation', DateType::class, [
                 'widget' => 'choice',
                 'format' => 'd-M-y',
+                'years' => range(date("Y") - 100, date("Y") + 100)
             ])
         ;
     }

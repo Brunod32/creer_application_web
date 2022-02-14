@@ -29,7 +29,7 @@ class Contact
     private string $nationality;
 
     #[ORM\ManyToOne(targetEntity: Mission::class, inversedBy: 'contact')]
-    private Mission $mission;
+    private $mission;
 
     public function getId(): ?int
     {

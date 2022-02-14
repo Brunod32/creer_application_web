@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\MissionRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -35,10 +36,10 @@ class Mission
     private string $status;
 
     #[ORM\Column(type: 'date')]
-    private \DateTime $dateStart;
+    private DateTime $dateStart;
 
     #[ORM\Column(type: 'date')]
-    private \DateTime $dateEnd;
+    private DateTime $dateEnd;
 
     #[ORM\ManyToMany(targetEntity: Agent::class, inversedBy: 'missions')]
     private $agent;
@@ -54,11 +55,7 @@ class Mission
 
     #[ORM\ManyToOne(targetEntity: Speciality::class, inversedBy: 'missions')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Speciality $speciality;
-
-    #[ORM\ManyToOne(targetEntity: Administrator::class, inversedBy: 'missions')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Administrator $administrator;
+    private Speciality $speciality;
 
     #[Pure] public function __construct()
     {
@@ -283,26 +280,15 @@ class Mission
         return $this;
     }
 
-    public function getSpeciality(): ?Speciality
+
+    public function getSpeciality(): Speciality
     {
         return $this->speciality;
     }
 
-    public function setSpeciality(?Speciality $speciality): self
+    public function setSpeciality(Speciality $speciality): self
     {
         $this->speciality = $speciality;
-
-        return $this;
-    }
-
-    public function getAdministrator(): ?Administrator
-    {
-        return $this->administrator;
-    }
-
-    public function setAdministrator(?Administrator $administrator): self
-    {
-        $this->administrator = $administrator;
 
         return $this;
     }
@@ -312,4 +298,6 @@ class Mission
     {
         return $this->title;
     }
+
+
 }

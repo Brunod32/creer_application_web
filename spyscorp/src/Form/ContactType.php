@@ -38,7 +38,6 @@ class ContactType extends AbstractType
             ->add('mission', EntityType::class, [
                 'choice_label' => 'title',
                 'class' => Mission::class,
-                'multiple' => true,
                 'expanded' => true,
             ])
         ;
