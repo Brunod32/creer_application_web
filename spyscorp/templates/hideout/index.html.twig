@@ -33,8 +33,8 @@
                     <td>{{ hideout.country }}</td>
                     <td>{{ hideout.type }}</td>
                     <td>
-                        <a href="{{ path('hideout_show', {'id': hideout.id}) }}">Détails</a>
-                        <a href="{{ path('hideout_edit', {'id': hideout.id}) }}">Modifier</a>
+                        <a href="{{ path('hideout_show', {'id': hideout.id}) }}"><i class="fa-solid fa-folder-open" title="Détails"></i></a>
+                        <a href="{{ path('hideout_edit', {'id': hideout.id}) }}"><i class="fa-solid fa-pen-clip" title="Modifier"></i></a>
                     </td>
                 </tr>
             {% else %}

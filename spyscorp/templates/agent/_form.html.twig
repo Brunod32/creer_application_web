@@ -1,10 +1,28 @@
 {{ form_start(form) }}
-    {{ form_row(form.lastName, {'label': 'Nom'}) }}
-    {{ form_row(form.firstName, {'label': 'Prénom'}) }}
+<div>
+    <div class="row justify-content-between">
+        <div class="col-12 col-lg-5 ml-auto">
+            {{ form_row(form.lastName, {'label': 'Nom'}) }}
+            {{ form_row(form.firstName, {'label': 'Prénom'}) }}
+        </div>
+        <div class="col-12 col-lg-5 mr-auto">
+            {{ form_row(form.code, {'label': 'Code'}) }}
+            {{ form_row(form.nationality, {'label': 'Nationalité'}) }}
+        </div>
+    </div>
+</div>
+
     {{ form_row(form.dateOfBirth, {'label': 'Date de naissance'}) }}
-    {{ form_row(form.code, {'label': 'Code'}) }}
-    {{ form_row(form.nationality, {'label': 'Nationalité'}) }}
-    {{ form_row(form.speciality, {'label': 'Spécialité'}) }}
-    {{ form_row(form.missions, {'label': 'Missions'}) }}
+<div>
+    <div class="row justify-content-between">
+        <div class="col-5 col-lg-5 ml-auto">
+            {{ form_row(form.speciality, {'label': 'Spécialité'}) }}
+        </div>
+        <div class="col-5 col-lg-5 mr-auto">
+            {{ form_row(form.missions, {'label': 'Missions'}) }}
+        </div>
+    </div>
+</div>
+
     <button class="btn btn-primary ml-5 mt-2">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

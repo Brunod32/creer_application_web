@@ -35,8 +35,8 @@
                     <td>{{ target.code }}</td>
                     <td>{{ target.nationality }}</td>
                     <td>
-                        <a href="{{ path('target_show', {'id': target.id}) }}">Détails</a>
-                        <a href="{{ path('target_edit', {'id': target.id}) }}">Modifier</a>
+                        <a href="{{ path('target_show', {'id': target.id}) }}"><i class="fa-solid fa-folder-open" title="Détails"></i></a>
+                        <a href="{{ path('target_edit', {'id': target.id}) }}"><i class="fa-solid fa-pen-clip" title="Modifier"></i></a>
                     </td>
                 </tr>
             {% else %}
