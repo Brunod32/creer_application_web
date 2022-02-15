@@ -51,6 +51,35 @@
                 <th>Date de fin</th>
                 <td>{{ mission.dateEnd ? mission.dateEnd|date('d-m-Y') : '' }}</td>
             </tr>
+            <tr>
+                <th>Spécialité</th>
+                <td>{{ mission.speciality.name }}</td>
+            </tr>
+            <tr>
+                <th>Agent</th>
+                {% for agent in mission.agent %}
+                    <td>{{ agent.firstName ~' '~ agent.lastname }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Contact</th>
+                {% for contact in mission.contact%}
+                    <td>{{ contact.firstName ~' '~ contact.lastname }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Cible</th>
+                {% for target in mission.target %}
+                    <td>{{ target.firstName ~' '~ target.lastname }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Planque</th>
+                {% for hideout in mission.hideout %}
+                    <td>{{ hideout.code }}</td>
+                {% endfor %}
+            </tr>
+
             </tbody>
         </table>
     </div>
@@ -59,7 +88,7 @@
         <a href="{{ path('mission_index') }}" class="btn btn-success">Retour à la liste</a>
     </div>
     <div class="ms-5 m-2">
-        <a href="{{ path('mission_edit', {'id': mission.id}) }}" class="btn btn-primary">Détails</a>
+        <a href="{{ path('mission_edit', {'id': mission.id}) }}" class="btn btn-primary">Modifier</a>
 
         {{ include('mission/_delete_form.html.twig') }}
     </div>

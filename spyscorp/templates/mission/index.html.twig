@@ -13,7 +13,7 @@
     </div>
 
     <div class="m-5">
-        <table class="table table-hover">
+        <table class="table table-striped table-hover">
             <thead>
             <tr>
                 <th>Identifiant</th>
@@ -25,6 +25,10 @@
                 <th>Statut</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
+{#                <th>Agent</th>#}
+{#                <th>Spécialité</th>#}
+{#                <th>Planque</th>#}
+{#                <th>Cible</th>#}
                 <th>actions</th>
             </tr>
             </thead>
@@ -40,6 +44,18 @@
                     <td>{{ mission.status }}</td>
                     <td>{{ mission.dateStart ? mission.dateStart|date('d-m-Y') : '' }}</td>
                     <td>{{ mission.dateEnd ? mission.dateEnd|date('d-m-Y') : '' }}</td>
+{#                    {% for missions in mission %}#}
+{#                        <td>{{ mission.agent }}</td>#}
+{#                    {% endfor %}#}
+{#                    {% for missions in mission %}#}
+{#                        <td>{{ mission.speciality }}</td>#}
+{#                    {% endfor %}#}
+{#                    {% for missions in mission %}#}
+{#                        <td>{{ mission.hideout }}</td>#}
+{#                    {% endfor %}#}
+{#                    {% for missions in mission %}#}
+{#                        <td>{{ mission.target }}</td>#}
+{#                    {% endfor %}#}
                     <td>
                         <a href="{{ path('mission_show', {'id': mission.id}) }}">Détails</a>
                         <a href="{{ path('mission_edit', {'id': mission.id}) }}">Modifier</a>

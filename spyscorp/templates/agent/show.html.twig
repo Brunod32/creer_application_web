@@ -39,6 +39,12 @@
                 <th>Nationalité</th>
                 <td>{{ agent.nationality }}</td>
             </tr>
+            <tr>
+                <th>Spécialité</th>
+                {% for speciality in agent.speciality %}
+                    <td>{{ speciality.name }}</td>
+                {% endfor %}
+            </tr>
             </tbody>
         </table>
     </div>
