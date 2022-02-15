@@ -280,7 +280,6 @@ class Mission
         return $this;
     }
 
-
     public function getSpeciality(): Speciality
     {
         return $this->speciality;
@@ -299,5 +298,80 @@ class Mission
         return $this->title;
     }
 
+
+    // Mission constraints
+    // For a mission, Contact must have the nationality of the country's mission
+    public function contactIsValid(): bool
+    {
+        $dataContact = $this->contact;
+        $dataCountry = $this->country;
+
+        foreach ($dataContact as $contact) {
+            if ($dataCountry != $contact->getNationality()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // For a mission, less than one agent should have the same speciality than the mission required one
+    public function agentSpecialityIsValid(): bool
+    {
+        $dataAgent = $this->agent;
+        $dataSpeciality = $this->speciality;
+        $AgentSpeciality = [];
+
+        foreach ($dataAgent as $agent) {
+            $agentSpeciality = $agent->displaySpecialities();
+            if (in_array($dataSpeciality->getName(), $agentSpeciality)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // For a mission, Target and Agent can't have same nationality
+    public function agentNationalityIsValid(): bool
+    {
+        $dataAgent = $this->agent;
+        $dataTarget = $this->target;
+
+        foreach ($dataAgent as $agent) {
+            foreach ($dataTarget as $target) {
+                if ($agent->getNationality() == $target->getNationality()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // For a mission, Hideout must locate in the country's mission
+    public function hideoutIsValid(): bool
+    {
+        $dataHideout = $this->hideout;
+        $dataCountry = $this->country;
+
+        foreach ($dataHideout as $hideout) {
+            if ($hideout->getCountry() != $dataCountry) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Validate conditions
+    public function missionIsValid(): bool
+    {
+        if (
+            !$this->contactIsValid() ||
+            !$this->agentSpecialityIsValid() ||
+            !$this->agentNationalityIsValid() ||
+            !$this->hideoutIsValid()
+        ) {
+            return false;
+        }
+        return true;
+    }
 
 }

@@ -9,5 +9,8 @@
     {{ form_row(form.dateEnd, {'label': 'Date de fin'}) }}
     {{ form_row(form.agent, {'label': 'Agent'}) }}
     {{ form_row(form.speciality, {'label': 'Spécialité'}) }}
+    {{ form_row(form.target, {'label': 'Cible'}) }}
+    {{ form_row(form.hideout, {'label': 'Planque'}) }}
+    {{ form_row(form.contact, {'label': 'Contact'}) }}
     <button class="btn btn-primary ml-5 mt-2">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

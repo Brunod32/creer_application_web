@@ -164,4 +164,16 @@ class Agent
     {
         return $this->firstName . ' ' .$this->lastName;
     }
+
+    // Return un array of agent's speciality use in the constraints control function in file Mission.php
+    public function displaySpecialities(): array
+    {
+        $agentsSpecialities = $this->speciality;
+        $specialitiesList = [];
+
+        foreach ($agentsSpecialities as $agentsSpecialitie) {
+            $specialitiesList[] = $agentsSpecialitie->getName();
+        }
+        return $specialitiesList;
+    }
 }

@@ -30,6 +30,28 @@ class MissionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$mission->missionIsValid()) {
+                $this->addFlash(
+                    'error',
+                    'La mission ne respecte pas les contraintes, vérifiez les informations suivantes:');
+                $this->addFlash(
+                    'error',
+                    'Sur une mission, la ou les cibles ne peuvent pas avoir la même nationalité que le ou les agents');
+                $this->addFlash(
+                    'error',
+                    'Sur une mission, les contacts sont obligatoirement de la nationalité du pays de la mission,
+                    la planque est obligatoirement dans le même pays que la mission,
+                    il faut assigner au moins 1 agent disposant de la spécialité requise
+                ');
+                $this->addFlash(
+                    'error',
+                    'Sur une mission, la planque est obligatoirement dans le même pays que la mission.');
+                $this->addFlash(
+                    'error',
+                    'Sur une mission, il faut assigner au moins un agent disposant de la spécialité requise.');
+                return $this->redirectToRoute('mission_new');
+            }
+
             $entityManager->persist($mission);
             $entityManager->flush();
 
@@ -57,6 +79,28 @@ class MissionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$mission->missionIsValid()) {
+                $this->addFlash(
+                    'error',
+                    'La mission ne respecte pas les contraintes, vérifiez les informations suivantes:');
+                $this->addFlash(
+                    'error',
+                    'Sur une mission, la ou les cibles ne peuvent pas avoir la même nationalité que le ou les agents');
+                $this->addFlash(
+                    'error',
+                    'Sur une mission, les contacts sont obligatoirement de la nationalité du pays de la mission,
+                    la planque est obligatoirement dans le même pays que la mission,
+                    il faut assigner au moins 1 agent disposant de la spécialité requise
+                ');
+                $this->addFlash(
+                    'error',
+                    'Sur une mission, la planque est obligatoirement dans le même pays que la mission.');
+                $this->addFlash(
+                    'error',
+                    'Sur une mission, il faut assigner au moins un agent disposant de la spécialité requise.');
+                return $this->redirectToRoute('mission_new');
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('mission_index', [], Response::HTTP_SEE_OTHER);
