@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/administrator')]
+#[Route('/admin/administrator')]
 class AdministratorController extends AbstractController
 {
     #[Route('/', name: 'administrator_index', methods: ['GET'])]

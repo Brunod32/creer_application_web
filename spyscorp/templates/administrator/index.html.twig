@@ -22,7 +22,7 @@
                 <th>Email</th>
                 <th>Mot de passe</th>
                 <th>Date de création</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -35,8 +35,8 @@
                     <td>{{ administrator.password }}</td>
                     <td>{{ administrator.dateOfCreation ? administrator.dateOfCreation|date('d-m-Y') : '' }}</td>
                     <td>
-                        <a href="{{ path('administrator_show', {'id': administrator.id}) }}">show</a>
-                        <a href="{{ path('administrator_edit', {'id': administrator.id}) }}">edit</a>
+                        <a href="{{ path('administrator_show', {'id': administrator.id}) }}"><i class="fa-solid fa-folder-open" title="Détails"></i></a>
+                        <a href="{{ path('administrator_edit', {'id': administrator.id}) }}"><i class="fa-solid fa-pen-clip" title="Modifier"></i></a>
                     </td>
                 </tr>
             {% else %}

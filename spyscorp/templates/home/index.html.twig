@@ -3,5 +3,21 @@
 {% block title %}Accueil Spy's Corp{% endblock %}
 
 {% block body %}
-{{ include('_navbar.html.twig') }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <h1 class="text-center mt-5 mb-5">Spy's Corp</h1>
+                </div>
+                <img
+                    src="{{ asset('img/confidentiel.jpg') }}"
+                    width="300"
+                    class="rounded mx-auto d-block mt-5 shadow p-3 mb-5 bg-white rounded"
+                    alt="confidentiel"
+                >
+                    <p class="text-center">Consulter les <a href="{{ path('mission_index') }}">missions</a></p>
+                    <p class="text-center"><a href="{{ path('app_login') }}">Personnes autorisées</a></p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
