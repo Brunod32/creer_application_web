@@ -1,0 +1,11 @@
+body {
+    background-image: url('../img/matrix.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: 0.99;
+}
+
+i {
+    color: black;
+}
