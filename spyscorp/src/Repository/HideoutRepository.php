@@ -19,6 +19,19 @@ class HideoutRepository extends ServiceEntityRepository
         parent::__construct($registry, Hideout::class);
     }
 
+    // Pagination
+    public function findHideoutPaginer(int $page = 1, int $limit = 5): array
+    {
+        return $this->findBy([], [], $limit, ($page - 1) * 5);
+
+    }
+
+    public function findHideoutPaginerCount(): int
+    {
+        $mission = $this->findAll();
+        return $this->count([]);
+    }
+
     // /**
     //  * @return Hideout[] Returns an array of Hideout objects
     //  */

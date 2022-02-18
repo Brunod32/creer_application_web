@@ -15,14 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdministratorController extends AbstractController
 {
     #[Route('/', name: 'administrator_index', methods: ['GET'])]
-    public function index(AdministratorRepository $administratorRepository): Response
+    #[Route('/{page}', name: 'administrator_paginer', methods: ['GET'])]
+    public function index(AdministratorRepository $administratorRepository, int $page = 1): Response
     {
+        $nbAdministrator = $administratorRepository->findAdministratorPaginerCount();
         return $this->render('administrator/index.html.twig', [
-            'administrators' => $administratorRepository->findAll(),
+            'administrators' => $administratorRepository->findAdministratorPaginer($page),
+            'currentPage' => $page,
+            'maxAdministrator' => $nbAdministrator > ($page * 5)
         ]);
     }
 
-    #[Route('/new', name: 'administrator_new', methods: ['GET', 'POST'])]
+    #[Route('/administrator/new', name: 'administrator_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $administrator = new Administrator();
@@ -42,7 +46,7 @@ class AdministratorController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'administrator_show', methods: ['GET'])]
+    #[Route('/administrator/{id}', name: 'administrator_show', methods: ['GET'])]
     public function show(Administrator $administrator): Response
     {
         return $this->render('administrator/show.html.twig', [

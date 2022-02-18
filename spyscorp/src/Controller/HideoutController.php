@@ -15,14 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class HideoutController extends AbstractController
 {
     #[Route('/', name: 'hideout_index', methods: ['GET'])]
-    public function index(HideoutRepository $hideoutRepository): Response
+    #[Route('/{page}', name: 'hideout_paginer', methods: ['GET'])]
+    public function index(HideoutRepository $hideoutRepository, int $page = 1): Response
     {
+        $nbHideout = $hideoutRepository->findHideoutPaginerCount();
         return $this->render('hideout/index.html.twig', [
-            'hideouts' => $hideoutRepository->findAll(),
+            'hideouts' => $hideoutRepository->findHideoutPaginer($page),
+            'currentPage' => $page,
+            'maxHideout' => $nbHideout > ($page * 5)
         ]);
     }
 
-    #[Route('/new', name: 'hideout_new', methods: ['GET', 'POST'])]
+    #[Route('/hideout/new', name: 'hideout_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $hideout = new Hideout();
@@ -42,7 +46,7 @@ class HideoutController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'hideout_show', methods: ['GET'])]
+    #[Route('/hideout/{id}', name: 'hideout_show', methods: ['GET'])]
     public function show(Hideout $hideout): Response
     {
         return $this->render('hideout/show.html.twig', [

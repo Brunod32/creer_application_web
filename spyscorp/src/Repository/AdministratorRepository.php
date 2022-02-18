@@ -19,6 +19,20 @@ class AdministratorRepository extends ServiceEntityRepository
         parent::__construct($registry, Administrator::class);
     }
 
+    // Pagination
+    public function findAdministratorPaginer(int $page = 1, int $limit = 5): array
+    {
+        return $this->findBy([], [], $limit, ($page - 1) * 5);
+
+    }
+
+    public function findAdministratorPaginerCount(): int
+    {
+        $mission = $this->findAll();
+        return $this->count([]);
+    }
+
+
     // /**
     //  * @return Administrator[] Returns an array of Administrator objects
     //  */

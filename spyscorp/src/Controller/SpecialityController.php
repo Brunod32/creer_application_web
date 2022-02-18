@@ -15,14 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class SpecialityController extends AbstractController
 {
     #[Route('/', name: 'speciality_index', methods: ['GET'])]
-    public function index(SpecialityRepository $specialityRepository): Response
+    #[Route('/{page}', name: 'speciality_paginer', methods: ['GET'])]
+    public function index(SpecialityRepository $specialityRepository, int $page = 1): Response
     {
+        $nbSpeciality = $specialityRepository->findSpecialityPaginerCount();
         return $this->render('speciality/index.html.twig', [
-            'specialities' => $specialityRepository->findAll(),
+            'specialities' => $specialityRepository->findSpecialityPaginer($page),
+            'currentPage' => $page,
+            'maxSpeciality' => $nbSpeciality > ($page * 5)
         ]);
     }
 
-    #[Route('/new', name: 'speciality_new', methods: ['GET', 'POST'])]
+    #[Route('/speciality/new', name: 'speciality_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $speciality = new Speciality();
@@ -42,7 +46,7 @@ class SpecialityController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'speciality_show', methods: ['GET'])]
+    #[Route('/speciality/{id}', name: 'speciality_show', methods: ['GET'])]
     public function show(Speciality $speciality): Response
     {
         return $this->render('speciality/show.html.twig', [

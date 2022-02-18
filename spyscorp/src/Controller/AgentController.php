@@ -15,14 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class AgentController extends AbstractController
 {
     #[Route('/', name: 'agent_index', methods: ['GET'])]
-    public function index(AgentRepository $agentRepository): Response
+    #[Route('/{page}', name: 'agent_paginer', methods: ['GET'])]
+    public function index(AgentRepository $agentRepository, int $page = 1): Response
     {
+        $nbAgent = $agentRepository->findAgentPaginerCount();
         return $this->render('agent/index.html.twig', [
-            'agents' => $agentRepository->findAll(),
+            'agents' => $agentRepository->findAgentPaginer($page),
+            'currentPage' => $page,
+            'maxAgent' => $nbAgent > ($page * 5)
         ]);
     }
 
-    #[Route('/new', name: 'agent_new', methods: ['GET', 'POST'])]
+    #[Route('/agent/new', name: 'agent_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $agent = new Agent();
@@ -42,7 +46,7 @@ class AgentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'agent_show', methods: ['GET'])]
+    #[Route('/agent/{id}', name: 'agent_show', methods: ['GET'])]
     public function show(Agent $agent): Response
     {
         return $this->render('agent/show.html.twig', [

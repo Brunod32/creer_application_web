@@ -19,6 +19,19 @@ class MissionRepository extends ServiceEntityRepository
         parent::__construct($registry, Mission::class);
     }
 
+    // Pagination
+    public function findMissionPaginer(int $page = 1, int $limit = 5): array
+    {
+        return $this->findBy([], [], $limit, ($page - 1) * 5);
+
+    }
+
+    public function findMissionPaginerCount(): int
+    {
+        $mission = $this->findAll();
+        return $this->count([]);
+    }
+
     // /**
     //  * @return Mission[] Returns an array of Mission objects
     //  */

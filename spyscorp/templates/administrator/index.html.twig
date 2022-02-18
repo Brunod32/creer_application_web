@@ -13,6 +13,19 @@
     </div>
 
     <div class="m-5">
+            <div class="d-flex justify-content-end">
+                {% if currentPage > 1 %}
+                    <a href="{{ path('administrator_paginer', {'page': currentPage - 1}) }}" class="btn mt-5">
+                        <i class="fa-solid fa-chevron-left" title="Page précédente"></i>
+                    </a>
+                {% endif %}
+                {% if maxAdministrator %}
+                    <a href="{{ path('administrator_paginer', {'page': currentPage + 1}) }}" class="btn mt-5">
+                        <i class="fa-solid fa-chevron-right" title="Page suivante"></i>
+                    </a>
+                {% endif %}
+            </div>
+        
         <table class="table table-hover">
             <thead>
             <tr>

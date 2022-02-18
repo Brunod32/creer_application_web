@@ -15,14 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     #[Route('/', name: 'contact_index', methods: ['GET'])]
-    public function index(ContactRepository $contactRepository): Response
+    #[Route('/{page}', name: 'contact_paginer', methods: ['GET'])]
+    public function index(ContactRepository $contactRepository, int $page = 1): Response
     {
+        $nbContact = $contactRepository->findContactPaginerCount();
         return $this->render('contact/index.html.twig', [
-            'contacts' => $contactRepository->findAll(),
+            'contacts' => $contactRepository->findContactPaginer($page),
+            'currentPage' => $page,
+            'maxContact' => $nbContact > ($page * 5)
         ]);
     }
 
-    #[Route('/new', name: 'contact_new', methods: ['GET', 'POST'])]
+    #[Route('/contact/new', name: 'contact_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $contact = new Contact();
@@ -42,7 +46,7 @@ class ContactController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'contact_show', methods: ['GET'])]
+    #[Route('/Contact/{id}', name: 'contact_show', methods: ['GET'])]
     public function show(Contact $contact): Response
     {
         return $this->render('contact/show.html.twig', [

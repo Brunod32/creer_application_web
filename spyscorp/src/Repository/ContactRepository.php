@@ -19,6 +19,19 @@ class ContactRepository extends ServiceEntityRepository
         parent::__construct($registry, Contact::class);
     }
 
+    // Pagination
+    public function findContactPaginer(int $page = 1, int $limit = 5): array
+    {
+        return $this->findBy([], [], $limit, ($page - 1) * 5);
+
+    }
+
+    public function findContactPaginerCount(): int
+    {
+        $mission = $this->findAll();
+        return $this->count([]);
+    }
+
     // /**
     //  * @return Contact[] Returns an array of Contact objects
     //  */

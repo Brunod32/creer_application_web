@@ -15,14 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class TargetController extends AbstractController
 {
     #[Route('/', name: 'target_index', methods: ['GET'])]
-    public function index(TargetRepository $targetRepository): Response
+    #[Route('/{page}', name: 'target_paginer', methods: ['GET'])]
+    public function index(TargetRepository $targetRepository, int $page = 1): Response
     {
+        $nbTarget = $targetRepository->findTargetPaginerCount();
         return $this->render('target/index.html.twig', [
-            'targets' => $targetRepository->findAll(),
+            'targets' => $targetRepository->findTargetPaginer($page),
+            'currentPage' => $page,
+            'maxTarget' => $nbTarget > ($page * 5)
         ]);
     }
 
-    #[Route('/new', name: 'target_new', methods: ['GET', 'POST'])]
+    #[Route('/target/new', name: 'target_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $target = new Target();
@@ -42,7 +46,7 @@ class TargetController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'target_show', methods: ['GET'])]
+    #[Route('/target/{id}', name: 'target_show', methods: ['GET'])]
     public function show(Target $target): Response
     {
         return $this->render('target/show.html.twig', [

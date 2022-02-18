@@ -15,11 +15,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class MissionController extends AbstractController
 {
     #[Route('/mission', name: 'mission_index', methods: ['GET'])]
-    public function index(MissionRepository $missionRepository): Response
+    #[Route('/mission/{page}', name: 'mission_paginer', methods: ['GET'])]
+    public function index(
+        MissionRepository $missionRepository,
+        int $page = 1
+    ): Response
     {
+        $nbMission = $missionRepository->findMissionPaginerCount();
         return $this->render('mission/index.html.twig', [
-            'missions' => $missionRepository->findAll(),
+            'missions' => $missionRepository->findMissionPaginer($page),
+            'currentPage' => $page,
+            'maxMission' => $nbMission > ($page * 5)
         ]);
+
     }
 
     #[Route('/admin/mission/new', name: 'mission_new', methods: ['GET', 'POST'])]
@@ -64,7 +72,7 @@ class MissionController extends AbstractController
         ]);
     }
 
-    #[Route('/mission/{id}', name: 'mission_show', methods: ['GET'])]
+    #[Route('/mission/mission/{id}', name: 'mission_show', methods: ['GET'])]
     public function show(Mission $mission): Response
     {
         return $this->render('mission/show.html.twig', [
@@ -123,3 +131,4 @@ class MissionController extends AbstractController
         return $this->redirectToRoute('mission_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+

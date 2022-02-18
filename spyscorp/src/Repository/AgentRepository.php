@@ -19,6 +19,20 @@ class AgentRepository extends ServiceEntityRepository
         parent::__construct($registry, Agent::class);
     }
 
+    // Pagination
+    public function findAgentPaginer(int $page = 1, int $limit = 5): array
+    {
+        return $this->findBy([], [], $limit, ($page - 1) * 5);
+
+    }
+
+    public function findAgentPaginerCount(): int
+    {
+        $mission = $this->findAll();
+        return $this->count([]);
+    }
+
+
     // /**
     //  * @return Agent[] Returns an array of Agent objects
     //  */
