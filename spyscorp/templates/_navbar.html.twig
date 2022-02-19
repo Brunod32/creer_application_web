@@ -4,7 +4,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('agent_index') }}">Agents</a>
                 </li>
@@ -27,10 +27,16 @@
                     <a class="nav-link" href="{{ path('administrator_index') }}">Administrateurs</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto mb-lg-0">
+                <li>
+                    <form action="{{ path('search-result') }}" class="mt-2">
+                        <input name="search" id="search" type="text" placeholder="Titre mission">
+                        <button type="submit" id="go"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </li>
                 {% if app.user %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket fa-2x" title="Se déconnecter"></i></a>
+                    <a class="nav-link" id="leave" href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket fa-2x" title="Se déconnecter"></i></a>
                 </li>
                 {% endif %}
             </ul>

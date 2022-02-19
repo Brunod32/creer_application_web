@@ -19,11 +19,10 @@ class MissionRepository extends ServiceEntityRepository
         parent::__construct($registry, Mission::class);
     }
 
-    // Pagination
+    // Paging
     public function findMissionPaginer(int $page = 1, int $limit = 5): array
     {
         return $this->findBy([], [], $limit, ($page - 1) * 5);
-
     }
 
     public function findMissionPaginerCount(): int
@@ -32,32 +31,15 @@ class MissionRepository extends ServiceEntityRepository
         return $this->count([]);
     }
 
-    // /**
-    //  * @return Mission[] Returns an array of Mission objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    // Method for search engine
+    public function searchMission(string $search): array
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('mission');
+        $query = $qb->select('mission')
+            ->where('mission.title LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery();
 
-    /*
-    public function findOneBySomeField($value): ?Mission
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $query->getResult();
     }
-    */
 }

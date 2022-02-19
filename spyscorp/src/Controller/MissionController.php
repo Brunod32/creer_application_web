@@ -27,7 +27,28 @@ class MissionController extends AbstractController
             'currentPage' => $page,
             'maxMission' => $nbMission > ($page * 5)
         ]);
+    }
 
+    #[Route('/mission-search/{id}', name: 'mission_search', methods: ['GET'])]
+    // La classe MissionRepository permet d'effectuer les requêtes sql SELECT voulues via 4 methodes find()
+    public function search($id, MissionRepository $missionRepository): Response
+    {
+        $missionSearch = $missionRepository->find($id);
+        return $this->render('mission/search.html.twig', [
+            'missionSearch' => $missionSearch
+        ]);
+    }
+
+    #[Route('/search-results', name: 'search-result')]
+    public function searchMission(Request $request, MissionRepository $missionRepository)
+    {
+        $search =$request->query->get('search');
+        $missionsSearches = $missionRepository->searchMission($search);
+
+        return $this->render('mission/search.html.twig', [
+            'missionsSearches' => $missionsSearches,
+            'search' => $search
+        ]);
     }
 
     #[Route('/admin/mission/new', name: 'mission_new', methods: ['GET', 'POST'])]
@@ -130,5 +151,6 @@ class MissionController extends AbstractController
 
         return $this->redirectToRoute('mission_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
 

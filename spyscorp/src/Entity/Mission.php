@@ -15,7 +15,7 @@ class Mission
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int  $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 30)]
     private string $title;

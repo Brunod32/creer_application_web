@@ -19,7 +19,7 @@ class TargetRepository extends ServiceEntityRepository
         parent::__construct($registry, Target::class);
     }
 
-    // Pagination
+    // Paging
     public function findTargetPaginer(int $page = 1, int $limit = 5): array
     {
         return $this->findBy([], [], $limit, ($page - 1) * 5);

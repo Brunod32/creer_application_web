@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Résultats de recherche
+{% endblock %}
+
+{% block body %}
+    {{ include('_navbar.html.twig') }}
+    <h1 class="ms-5">Résultats de la recherche pour:  {{ search }}</h1>
+
+    {% for missionsSearch in missionsSearches %}
+        <section class="container-fluid">
+            <hr>
+            <h4>Titre de la mission: {{ missionsSearch.title }}</h4>
+            <p>Description: {{ missionsSearch.description }}
+                <a href="{{ path('mission_show', {'id': missionsSearch.id}) }}" class="ms-5">Détails de la mission</a>
+            </p>
+        </section>
+    {% endfor %}
+
+    {{ include('_footer.html.twig') }}
+{% endblock %}
+
+
+

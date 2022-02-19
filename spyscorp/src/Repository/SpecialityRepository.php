@@ -19,7 +19,7 @@ class SpecialityRepository extends ServiceEntityRepository
         parent::__construct($registry, Speciality::class);
     }
 
-    // Pagination
+    // Paging
     public function findSpecialityPaginer(int $page = 1, int $limit = 5): array
     {
         return $this->findBy([], [], $limit, ($page - 1) * 5);

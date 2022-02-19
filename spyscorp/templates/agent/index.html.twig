@@ -27,7 +27,7 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Idendifiant</th>
+{#                <th>Identifiant</th>#}
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Date de naissance</th>
@@ -39,7 +39,7 @@
             <tbody>
             {% for agent in agents %}
                 <tr>
-                    <td>{{ agent.id }}</td>
+{#                    <td>{{ agent.id }}</td>#}
                     <td>{{ agent.lastName }}</td>
                     <td>{{ agent.firstName }}</td>
                     <td>{{ agent.dateOfBirth ? agent.dateOfBirth|date('d-m-Y') : '' }}</td>

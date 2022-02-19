@@ -1,0 +1,17 @@
+#go {
+    border-radius: 50%;
+    border: none;
+}
+
+#go:hover {
+    color:blue;
+}
+
+#search {
+    border-radius: 10px;
+    border-color: cornflowerblue;
+}
+
+#leave:hover {
+   color:blue;
+}

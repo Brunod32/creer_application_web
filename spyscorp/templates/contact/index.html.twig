@@ -28,7 +28,7 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Identifiant</th>
+{#                <th>Identifiant</th>#}
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Date de naissance</th>
@@ -40,7 +40,7 @@
             <tbody>
             {% for contact in contacts %}
                 <tr>
-                    <td>{{ contact.id }}</td>
+{#                    <td>{{ contact.id }}</td>#}
                     <td>{{ contact.lastName }}</td>
                     <td>{{ contact.firstName }}</td>
                     <td>{{ contact.dateOfBirth ? contact.dateOfBirth|date('d-m-Y') : '' }}</td>

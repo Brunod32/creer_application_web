@@ -28,7 +28,7 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Identifiant</th>
+{#                <th>Identifiant</th>#}
                 <th>Nom</th>
                 <th>Actions</th>
             </tr>
@@ -36,7 +36,7 @@
             <tbody>
             {% for speciality in specialities %}
                 <tr>
-                    <td>{{ speciality.id }}</td>
+{#                    <td>{{ speciality.id }}</td>#}
                     <td>{{ speciality.name }}</td>
                     <td>
                         <a href="{{ path('speciality_show', {'id': speciality.id}) }}"><i class="fa-solid fa-folder-open" title="Détails"></i></a>
