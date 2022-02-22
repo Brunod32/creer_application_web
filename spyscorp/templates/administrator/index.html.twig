@@ -45,7 +45,7 @@
                     <td>{{ administrator.lastName }}</td>
                     <td>{{ administrator.firstName }}</td>
                     <td>{{ administrator.email }}</td>
-                    <td>{{ administrator.password }}</td>
+                    <td>{{ '********************' }}</td>
                     <td>{{ administrator.dateOfCreation ? administrator.dateOfCreation|date('d-m-Y') : '' }}</td>
                     <td>
                         <a href="{{ path('administrator_show', {'id': administrator.id}) }}"><i class="fa-solid fa-folder-open" title="Détails"></i></a>

@@ -3,9 +3,14 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    opacity: 0.99;
 }
 
 i {
     color: black;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        background-color: lightgrey;
+    }
 }
