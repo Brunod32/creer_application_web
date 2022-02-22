@@ -1,5 +1,5 @@
 body {
-    background-image: url('../img/matrix.jpg');
+    background-image: url('../img/big-brother.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -9,8 +9,13 @@ i {
     color: black;
 }
 
-@media screen and (max-width: 768px) {
+.card {
+    border-radius: 20px;
+}
+
+@media screen and (max-device-width: 700px) {
     body {
-        background-color: lightgrey;
+        background-image: url('../img/big-brother.jpg');
+        background-size: auto;
     }
 }
