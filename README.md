@@ -26,3 +26,6 @@ BONUS:
 - Add a system of filters and sorting on all the lists of the site
 - Add a search field for a mission
 - Use AJAX to send and retrieve data to your backend asynchronously, without having to reload the page
+
+
+To install this project, you can clone the repository with the git clone command then do composer install the get all the required dependencies. You need XAMPP, WAMPP, LAMPP or use the symfony serve (by doing symfony serve in a terminal) to transform your machine as a server.
